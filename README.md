@@ -1,5 +1,7 @@
 # React Spreadsheet Prototype
 
+## Live URL : https://himanshu-intern-assignment.netlify.app/
+
 This project is a static, front-end-only React prototype that visually replicates a spreadsheet view, designed to match a provided screenshot and Figma design.
 
 ## Features
