@@ -19,33 +19,32 @@ type JobRequest = {
   estValue: string;
 };
 
-// Create a column helper for type safety
 const columnHelper = createColumnHelper<JobRequest>();
 
 const columns = [
   columnHelper.accessor('id', {
-    header: '', // Empty header for the checkbox/row number column
-    id: 'rowSelection', // Give it a unique ID
+    header: '', 
+    id: 'rowSelection', 
     cell: ({ row }) => (
       <div className="flex items-center gap-2">
         <input
           type="checkbox"
-          className="form-checkbox h-4 w-4 text-blue-600 rounded" // Tailwind form-checkbox styling
+          className="form-checkbox h-4 w-4 text-blue-600 rounded" 
           checked={row.getIsSelected()}
           onChange={row.getToggleSelectedHandler()}
           aria-label={`Select row ${row.index + 1}`}
         />
-        <span className="text-xs text-gray-500">{row.index + 1}</span> {/* Row number */}
+        <span className="text-xs text-gray-500">{row.index + 1}</span> 
       </div>
     ),
-    size: 60, // Adjust width for checkbox + number
+    size: 60, 
     enableSorting: false,
     enableColumnFilter: false,
   }),
   columnHelper.accessor('jobRequest', {
     header: 'Job Request',
     cell: (info) =>
-      info.getValue() ? ( // Only render if not empty
+      info.getValue() ? ( 
         <div className="flex items-center">
           <span className="text-gray-400 mr-1 text-xs">Job Request</span>
           <span className="truncate">{info.getValue()}</span>
@@ -57,7 +56,7 @@ const columns = [
   columnHelper.accessor('submitted', {
     header: 'Submitted',
     cell: (info) => info.getValue(),
-    size: 120, // Adjusted slightly
+    size: 120, 
   }),
   columnHelper.accessor('status', {
     header: 'Status',
@@ -92,12 +91,12 @@ const columns = [
         </span>
       ) : null;
     },
-    size: 120, // Adjusted slightly
+    size: 120, 
   }),
   columnHelper.accessor('submitter', {
     header: 'Submitter',
     cell: (info) => info.getValue(),
-    size: 120, // Adjusted slightly
+    size: 120, 
   }),
   columnHelper.accessor('url', {
     header: 'URL',
@@ -112,7 +111,7 @@ const columns = [
           {info.getValue().replace('www.', '')}
         </a>
       ) : null,
-    size: 120, // Adjusted slightly
+    size: 120, 
   }),
   columnHelper.accessor('assigned', {
     header: () => (
@@ -121,9 +120,9 @@ const columns = [
       </div>
     ),
     cell: (info) => info.getValue(),
-    size: 120, // Adjusted slightly
+    size: 120, 
     meta: {
-      headerBgColor: 'bg-purple-100', // Custom meta for header background
+      headerBgColor: 'bg-purple-100',
       headerTextColor: 'text-purple-700',
     },
   }),
@@ -148,12 +147,12 @@ const columns = [
       }
       return <span className={`font-medium ${colorClass}`}>{priority}</span>;
     },
-    size: 100, // Adjusted slightly
+    size: 100, 
   }),
   columnHelper.accessor('dueDate', {
     header: 'Due Date',
     cell: (info) => info.getValue(),
-    size: 120, // Adjusted slightly
+    size: 120, 
     meta: {
       headerBgColor: 'bg-purple-100',
       headerTextColor: 'text-purple-700',
@@ -162,14 +161,14 @@ const columns = [
   columnHelper.accessor('estValue', {
     header: 'Est. Value',
     cell: (info) => info.getValue(),
-    size: 120, // Adjusted slightly
+    size: 120, 
     meta: {
       headerBgColor: 'bg-purple-100',
       headerTextColor: 'text-purple-700',
     },
   }),
 ];
-// Sample Data (mimicking your screenshot)
+
 const defaultData: JobRequest[] = [
   {
     id: 1,
@@ -237,18 +236,18 @@ const defaultData: JobRequest[] = [
       id: 6 + i,
       jobRequest: '',
       submitted: '',
-      status: 'In-process' as 'In-process', // Default status, will be hidden by empty content
+      status: 'In-process' as 'In-process', 
       submitter: '',
       url: '',
       assigned: '',
-      priority: 'Low' as 'Low', // Default priority, will be hidden by empty content
+      priority: 'Low' as 'Low', 
       dueDate: '',
       estValue: '',
     })),
 ];
 
 function App() {
-  const [data] = React.useState(() => [...defaultData]); // Use useState for data
+  const [data] = React.useState(() => [...defaultData]); 
 
   const table = useReactTable({
     data,
@@ -259,10 +258,8 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800 font-sans flex flex-col">
-      {/* Header */}
       <header className="bg-white shadow p-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          {/* Left part of header: "Tool bar", "Hide fields", "Sort", "Filter", "Cell view" */}
           <div className="flex items-center gap-2">
             <button
               className="px-3 py-1 rounded-md text-sm hover:bg-gray-100"
@@ -297,7 +294,6 @@ function App() {
           </div>
         </div>
 
-        {/* Right part of header: Search, user, actions */}
         <div className="flex items-center gap-4">
           <div className="relative">
             <input
@@ -359,7 +355,6 @@ function App() {
         </div>
       </header>
 
-      {/* Top-left navigation/title section */}
       <div className="bg-white px-4 py-2 flex items-center text-sm border-b border-gray-200">
         <div className="flex items-center gap-1 text-gray-500">
           <span className="font-semibold text-gray-700">Workspace</span>{' '}
@@ -373,27 +368,23 @@ function App() {
           >
             ...
           </span>{' '}
-          {/* Placeholder for ellipsis/dropdown */}
         </div>
         <div
           className="ml-4 px-3 py-1 rounded-md bg-purple-100 text-purple-700 font-semibold text-xs flex items-center gap-1 cursor-pointer"
           onClick={() => console.log('Q3 Financial Overview dropdown clicked')}
         >
           <span className="text-lg">📊</span> Q3 Financial Overview{' '}
-          <span className="text-lg ml-1">🔽</span> {/* Placeholder for dropdown */}
+          <span className="text-lg ml-1">🔽</span> 
         </div>
       </div>
 
       <main className="flex flex-grow overflow-hidden">
         <div className="overflow-x-auto">
           <div className="flex-1 p-4 overflow-auto">
-            {/* "Job Request" title */}
             <h2 className="text-2xl font-bold mb-4">Job Request</h2>
 
-            {/* Spreadsheet Grid goes here */}
             <div className="bg-white rounded-lg shadow overflow-hidden border border-gray-200">
               {' '}
-              {/* Added border-gray-200 for outer table border */}
               <table className="w-full border-collapse">
                 <thead>
                   {table.getHeaderGroups().map((headerGroup) => (
@@ -410,11 +401,8 @@ function App() {
                           {header.isPlaceholder ? null : (
                             <div className="flex items-center gap-1">
                               {flexRender(header.column.columnDef.header, header.getContext())}
-                              {/* Sort and Filter Icons */}
                               <div className="flex items-center ml-1 space-x-1 absolute right-2 top-1/2 -translate-y-1/2">
                                 {' '}
-                                {/* Position icons to the right */}
-                                {/* Sort Icon (e.g., small triangle) */}
                                 {(header.column.id === 'submitted' ||
                                   header.column.id === 'status' ||
                                   header.column.id === 'submitter' ||
@@ -423,18 +411,17 @@ function App() {
                                   header.column.id === 'priority' ||
                                   header.column.id === 'dueDate' ||
                                   header.column.id === 'estValue') && (
-                                  <span className="text-gray-400 text-[8px] transform rotate-180 inline-block align-middle">
-                                    ▲
-                                  </span> // Up/Down triangle for sort
-                                )}
-                                {/* Filter Icon (e.g., small rectangle or dots) */}
+                                    <span className="text-gray-400 text-[8px] transform rotate-180 inline-block align-middle">
+                                      ▲
+                                    </span>
+                                  )}
                                 {(header.column.id === 'status' ||
                                   header.column.id === 'assigned' ||
                                   header.column.id === 'priority' ||
                                   header.column.id === 'dueDate' ||
-                                  header.column.id === 'estValue') && ( // Apply to these specific columns
-                                  <span className="text-gray-400 text-xs">🞂</span> // Simple filter icon placeholder
-                                )}
+                                  header.column.id === 'estValue') && ( 
+                                    <span className="text-gray-400 text-xs">🞂</span> 
+                                  )}
                               </div>
                             </div>
                           )}
@@ -466,7 +453,6 @@ function App() {
         </div>
       </main>
 
-      {/* Footer tabs */}
       <footer className="bg-white shadow-inner p-3 flex items-center justify-start gap-4 text-sm border-t border-gray-200">
         <button
           className="px-4 py-2 border-b-2 border-blue-600 text-blue-600 font-semibold"
